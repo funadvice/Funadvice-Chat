@@ -1,0 +1,45 @@
+Funadvice.com Chat
+------------------
+
+This is the chat system we use on Funadvice. Its super-simple (maybe too simple), but it works.
+I put it here so others wanting something simple could use this.
+
+Requirements:
+* Redis
+* PHP 5.1 or above
+
+No database is needed/required.
+
+Setup:
+------
+
+1. Clone this repository and rename it to your public_html or public folder.
+
+2. Edit chat.php to change the Redis database (uses database 9) as a default
+
+3. You should be ready to go. Point your browser to:
+http://chat.yoursite.com/index.php?u=username&r=room
+
+That should bring up the chat interface and you should be in room "room".
+
+
+Integration with your site:
+---------------------------
+
+1. In your site, if you have a roster of users online, you can link each user with their username into a room of whatever name you want.
+
+2. Have it appear in a popup window or something.
+
+3. You can make public rooms, that any user with a username can enter.
+
+4. You are responsible for putting in some kind of alert system for 1 to 1 chat. 
+What we do is put that on our site directly. We write a request in Redis, then a jQuery notifier 
+calls a script on the backend to see if the target part is online, with a link thats already populated with the target's name
+and a room name.
+
+
+I'd love some kind of feedback or suggestions for improvement. Lots of the code is cringe-worthy, but the basics of it work.
+
+<a href="http://www.funadvice.com">Funadvice - Ask, answer, connect</a>
+
+
