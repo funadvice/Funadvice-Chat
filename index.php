@@ -19,9 +19,10 @@
 <body style="margin: 0; padding: 0;">
 <div id="doc3" class="yui-t7">
    <div id="hd">
-	 		<b>Funadvice</b> &nbsp;
+	 		[ <b><?= strtolower(trim($_GET['u'])) ?></b> ] &nbsp;
 			<!-- <a href="#">Invite:</a> | -->
-			<span class="fclose"><a href="#" onClick="leave(); return(false);">End chat</a></span>
+			<span class="fclose"><a href="#" onClick="leave(); return(false);">Leave</a></span> &nbsp; |
+			<a href="http://www.funadvice.com/contact" target="_new">Feedback</a>
 			&nbsp;&nbsp;
 			<span id="info" style="display: none;"></span>
 	 </div>
@@ -29,14 +30,14 @@
 	<div class="yui-g">
 		<div id="wall">
 		<ul id="stream">
-			<li><span>00:00</span> <i>Welcome ot the chat room!</i></li>
+			<li><span>00:00</span> <i>Welcome to the chat room!</i></li>
 		</ul>
 		</div>
 	</div>
 	</div>
    <div id="ft">
 	 	<form method="POST" action="/" onSubmit="msg_send(); return(false);">
-			<input type="text" name="msg" id="msg" value="type here" autocomplete="off" onFocus="this.autocomplete='off'" />
+			<input type="text" name="msg" id="msg" value="" autocomplete="off" onFocus="this.autocomplete='off'" />
 		</form>
 	 </div>
 </div>

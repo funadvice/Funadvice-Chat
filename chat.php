@@ -24,6 +24,11 @@ class Chat {
 		$this->user = $this->cleanup_name($name);		
 		$this->room = $this->cleanup_name($room);
 		
+		// Remove any chat request we might have
+		if ($this->redis->get('chat_alert:' . $this->user)) {
+			$this->redis->delete('chat_alert:' . $this->user);
+		}
+		
 		// Build a list of people in this room, and add me if needed 
 		$this->roster($this->user);
 	}
@@ -109,15 +114,14 @@ class Chat {
 	
 	// Leave and end the chat
 	function leave() {
+		
+		$this->write('has left the room. Bye!');
+		
 		$ukey = "room:{$this->room}:{$this->user}";
 		if ($this->redis->exists($ukey)) {
-			$key = array_search($ukey, $this->people);
-			echo $key;
-			
+			$key = array_search($ukey, $this->people);			
 			// Delete the person from this array
 			if ($key >= 0) {
-				echo "\ndeleted\n";
-				$this->write('has left the room. Bye!');
 				$this->redis->delete($ukey);
 				$this->redis->delete('e' , $ukey);				
 				unset($this->people[$key]);
@@ -172,7 +176,7 @@ if ($q = $c->read()) {
 	// output the data in json
 	echo json_encode($q);
 } else {
-	echo '{}';
+	echo '{}' . time();
 }
 
 if ($_REQUEST['test']) {
